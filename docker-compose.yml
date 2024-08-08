@@ -2,14 +2,15 @@ version: '3.8'
 
 services:
   db:
-    image: postgres
-    container_name: gainmiles_db
+    image: postgres:15.3
+    container_name: db
+    hostname: db
     environment:
       POSTGRES_USER: GainMiles
       POSTGRES_PASSWORD: GainMiles
       POSTGRES_DB: gain_miles
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -23,10 +24,7 @@ services:
     environment:
       FLASK_APP: app.py
       FLASK_RUN_HOST: 0.0.0.0
+      FLASK_RUN_PORT: 3000
 
 volumes:
   pgdata:
-
-networks:
-  backend:
-     driver: bridge

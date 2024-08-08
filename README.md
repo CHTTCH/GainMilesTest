@@ -32,7 +32,7 @@ docker run --name gainmiles -e POSTGRES_USER=GainMiles -e POSTGRES_PASSWORD=Gain
 首先進入後端所在的資料夾：
 
 ```bash
-cd /{path_to_GanMilesTest}/
+cd /{path_to_GainMilesTest}/
 ```
 
 接著，執行下面的指令來啟動伺服器，並會在`localhost:3000`運作：
