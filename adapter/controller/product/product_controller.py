@@ -15,7 +15,17 @@ def create_product():
     create_use_case = CreateProduct(product_repository)
     new_product = create_use_case.execute(data)
     
-    return jsonify({'message': 'Product created', 'product': new_product.id}), 201
+    return jsonify({
+        'id': new_product.id,
+        'name': new_product.name,
+        'code': new_product.code,
+        'category': new_product.category,
+        'unit_price': new_product.unit_price,
+        'inventory': new_product.inventory,
+        'sizes': [size.name for size in new_product.sizes],
+        'colors': [color.name for color in new_product.colors]
+    }), 201
+    # return jsonify({'message': 'Product created', 'product': new_product.id}), 201
 
 @product_blueprint.route('/products', methods=['GET'])
 def get_products():

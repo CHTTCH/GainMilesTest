@@ -1,4 +1,8 @@
-from dataclasses import dataclass
+from entity.color.color import Color
+from entity.size.size import Size
+
+from dataclasses import dataclass, field
+from typing import List
 
 @dataclass
 class Product:
@@ -6,7 +10,7 @@ class Product:
     name: str
     code: str
     category: str
-    size: str
     unit_price: float
     inventory: int
-    color: str
+    sizes: List[Size] = field(default_factory=list)
+    colors: List[Color] = field(default_factory=list)
