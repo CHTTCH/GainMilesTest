@@ -2,7 +2,7 @@ from entity.product.product import Product
 from entity.color.color import Color
 from entity.size.size import Size
 from use_case.repository.repository_interface import RepositoryInterface
-
+from use_case.mapper.product.product_mapper import ProductMapper
 class CreateProduct:
     def __init__(self, repository: RepositoryInterface):
         self.repository = repository
@@ -19,7 +19,6 @@ class CreateProduct:
             colors=[Color(id=None, name=color) for color in data['colors']]
         )
 
-        #! need to use mapper to format new_product
-        self.repository.add(new_product)
+        product_dict = self.repository.add(ProductMapper.to_dict(new_product))
         #! need to replace with product_output
-        return new_product
+        return product_dict

@@ -7,53 +7,53 @@ from use_case.repository.repository_interface import RepositoryInterface
 
 class ProductRepository(RepositoryInterface):
     
-    def __get_all_colors(self, product: Product):
-        color_names=[color.name for color in product.colors]
+    def __get_all_colors(self, product: dict):
+        color_names=[color["name"] for color in product["colors"]]
         existing_colors = db.session.query(ColorModel).filter(ColorModel.name.in_(color_names)).all()
         existing_color_dict = {color.name: color for color in existing_colors}
         
         return existing_color_dict
     
-    def __get_all_sizes(self, product: Product):
-        size_names=[size.name for size in product.sizes]
+    def __get_all_sizes(self, product: dict):
+        size_names=[size["name"] for size in product["sizes"]]
         existing_sizes = db.session.query(SizeModel).filter(SizeModel.name.in_(size_names)).all()
         existing_size_dict = {size.name: size for size in existing_sizes}
         
         return existing_size_dict
         
-    def add(self, product: Product) -> ProductModel:
+    def add(self, product: dict) -> ProductModel:
         new_product = ProductModel(
-            name=product.name,
-            code=product.code,
-            category=product.category,
-            unit_price=product.unit_price,
-            inventory=product.inventory
+            name=product["name"],
+            code=product["code"],
+            category=product["category"],
+            unit_price=product["unit_price"],
+            inventory=product["inventory"]
         )
         db.session.add(new_product)
                 
-        for size in product.sizes:
+        for size in product["sizes"]:
             existing_size_dict = self.__get_all_sizes(product=product)
             
-            if size.name in existing_size_dict:
-                size_model=existing_size_dict[size.name]
+            if size["name"] in existing_size_dict:
+                size_model=existing_size_dict[size["name"]]
             else:
-                size_model = SizeModel(name=size.name)    
+                size_model = SizeModel(name=size["name"])    
                 db.session.add(size_model)
             new_product.sizes.append(size_model)
             
-        for color in product.colors:
+        for color in product["colors"]:
             existing_color_dict = self.__get_all_colors(product=product)
             
-            if color.name in existing_color_dict:
-                color_model=existing_color_dict[color.name]
+            if color["name"] in existing_color_dict:
+                color_model=existing_color_dict[color["name"]]
             else:
-                color_model = ColorModel(name=color.name)    
+                color_model = ColorModel(name=color["name"])    
                 db.session.add(color_model)
             new_product.colors.append(color_model)
         
         db.session.commit()
         
-        product.id = new_product.id
+        product["id"] = new_product.id
 
         return product
 
