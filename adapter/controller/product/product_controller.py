@@ -31,16 +31,19 @@ def create_product():
 def get_products():
     read_use_case = ReadProduct(product_repository)
     products = read_use_case.get_all()
-    return jsonify([{
-        'id': product.id,
-        'name': product.name,
-        'code': product.code,
-        'category': product.category,
-        'size': product.size,
-        'unit_price': float(product.unit_price),
-        'inventory': product.inventory,
-        'color': product.color
-    } for product in products])
+    if products:
+        return jsonify([{
+            'id': product.id,
+            'name': product.name,
+            'code': product.code,
+            'category': product.category,
+            'sizes': [size.name for size in product.sizes],
+            'unit_price': float(product.unit_price),
+            'inventory': product.inventory,
+            'colos': [color.name for color in product.colors]
+        } for product in products])
+    else:
+        return []
     
 @product_blueprint.route('/products/<int:id>', methods=['GET'])
 def get_product(id):
@@ -52,10 +55,10 @@ def get_product(id):
             'name': product.name,
             'code': product.code,
             'category': product.category,
-            'size': product.size,
+            'sizes': [size.name for size in product.sizes],
             'unit_price': float(product.unit_price),
             'inventory': product.inventory,
-            'color': product.color
+            'colors': [color.name for color in product.colors]
         })
     return jsonify({'message': 'Product not found'}), 404
 

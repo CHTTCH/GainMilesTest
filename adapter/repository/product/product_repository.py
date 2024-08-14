@@ -58,10 +58,41 @@ class ProductRepository(RepositoryInterface):
         return product
 
     def get_all(self) -> list:
-        return ProductModel.query.all()
+        product_models=ProductModel.query.all()
+        
+        if product_models is None:
+            return None
+        else:
+            return [
+                {
+                    'id': product_model.id,
+                    'name': product_model.name,
+                    'code': product_model.code,
+                    'category': product_model.category,
+                    'unit_price': product_model.unit_price,
+                    'inventory': product_model.inventory,
+                    'sizes': [{'id': size.id, 'name': size.name} for size in product_model.sizes],
+                    'colors': [{'id': color.id, 'name': color.name} for color in product_model.colors]
+                }
+                for product_model in product_models
+            ]
 
     def get_by_id(self, product_id: int) -> ProductModel:
-        return ProductModel.query.get(product_id)
+        product_model=ProductModel.query.get(product_id)
+        
+        if product_model is None:
+            return None
+        else:
+            return {
+                'id': product_model.id,
+                'name': product_model.name,
+                'code': product_model.code,
+                'category': product_model.category,
+                'unit_price': product_model.unit_price,
+                'inventory': product_model.inventory,
+                'sizes': [{'id': size.id, 'name': size.name} for size in product_model.sizes],
+                'colors': [{'id': color.id, 'name': color.name} for color in product_model.colors]
+            }
 
     def update(self, product: ProductModel) -> ProductModel:
         db.session.commit()

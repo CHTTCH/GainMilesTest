@@ -21,6 +21,5 @@ class CreateProduct:
 
         #! need to use mapper to format new_product
         self.repository.add(new_product)
-        print(new_product)
         #! need to replace with product_output
         return new_product
