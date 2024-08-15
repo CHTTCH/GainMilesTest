@@ -5,14 +5,4 @@ class UpdateProduct:
         self.repository = repository
 
     def execute(self, product_id, data):
-        product = self.repository.get_by_id(product_id)
-        if product:
-            product.name = data['name']
-            product.code = data['code']
-            product.category = data['category']
-            product.size = data['size']
-            product.unit_price = data['unit_price']
-            product.inventory = data['inventory']
-            product.color = data['color']
-            return self.repository.update(product)
-        return None
+        return True if self.repository.update(product_id, data) else False

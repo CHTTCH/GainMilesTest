@@ -1,7 +1,4 @@
 from use_case.repository.repository_interface import RepositoryInterface
-from entity.product.product import Product
-from entity.size.size import Size
-from entity.color.color import Color
 
 class ReadProduct:
     def __init__(self, repository: RepositoryInterface):
