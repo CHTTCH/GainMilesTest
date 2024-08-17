@@ -8,15 +8,15 @@ services:
     environment:
       POSTGRES_USER: GainMiles
       POSTGRES_PASSWORD: GainMiles
-      POSTGRES_DB: gain_miles
+      POSTGRES_DB: compose_pg_for_ci_cd_practice
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   web:
     build: .
-    container_name: gainmiles_web
+    container_name: flask_web_backend
     ports:
       - "3000:3000"
     depends_on:
