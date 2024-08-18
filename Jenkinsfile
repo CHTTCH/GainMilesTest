@@ -20,8 +20,8 @@ pipeline {
                 script {
                     // 更新包列表並安裝 Python 3 和 pip
                     sh '''
-                        sudo apt-get update
-                        sudo apt-get install -y python3 python3-pip
+                        apt-get update
+                        apt-get install -y python3 python3-pip
                     '''
                 }
             }
