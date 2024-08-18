@@ -15,6 +15,13 @@ pipeline {
             }
         }
 
+        stage('Refresh .bashrc') {
+            steps {
+                // 使用 Poetry 安裝依賴
+                sh '. ~/.bashrc'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 // 使用 Poetry 安裝依賴
