@@ -21,8 +21,8 @@ pipeline {
                     // 更新包列表並安裝 Python 3 和 pip
                     sh 'docker exec -u root <container_name> apt-get update && apt-get install -y python3 python3-pip'
                 }
-                }
             }
+            
         }
 
         stage('Install Poetry') {
