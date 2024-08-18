@@ -25,6 +25,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // 使用 Poetry 安裝依賴
+                sh 'whoami'
                 sh 'poetry'
                 sh 'poetry install'
             }
