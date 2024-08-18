@@ -2,8 +2,7 @@ pipeline {
     agent { label 'build-agent' }  // 指定要使用的 Jenkins 節點標籤
 
     environment {
-        POETRY_HOME = "${HOME}/.poetry"  // Poetry 的安裝路徑
-        PATH = "${POETRY_HOME}/bin:${PATH}"  // 將 Poetry 加入 PATH
+        PATH = "/root/.local/bin:${PATH}"  // 將 /root/.local/bin 添加到 PATH
     }
 
     stages {
