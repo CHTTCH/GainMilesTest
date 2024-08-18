@@ -10,7 +10,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 // 拉取代碼
-                git 'https://github.com/CHTTCH/Practice_CI_CD.git'
+                git branch: 'main', 
+                    url: 'https://github.com/CHTTCH/Practice_CI_CD.git'
             }
         }
 
