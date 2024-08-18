@@ -15,6 +15,18 @@ pipeline {
             }
         }
 
+        stage('Install Python 3') {
+            steps {
+                script {
+                    // 更新包列表並安裝 Python 3 和 pip
+                    sh '''
+                        sudo apt-get update
+                        sudo apt-get install -y python3 python3-pip
+                    '''
+                }
+            }
+        }
+
         stage('Install Poetry') {
             steps {
                 // 安裝 Poetry（如果尚未安裝）
