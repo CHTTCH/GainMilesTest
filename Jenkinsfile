@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'build-agent' }  // 使用 build-agent 作為運行節點
+    agent { label 'build-agent' }  // 指定要使用的 Jenkins 節點標籤
 
     environment {
         POETRY_HOME = "${HOME}/.poetry"  // Poetry 的安裝路徑
@@ -9,26 +9,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // 拉取代碼
+                // 從 GitHub 拉取代碼
                 git branch: 'main', 
                     url: 'https://github.com/CHTTCH/Practice_CI_CD.git'
-            }
-        }
-
-        stage('Install Python 3') {
-            steps {
-                script {
-                    // 更新包列表並安裝 Python 3 和 pip
-                    sh 'docker exec -u root <container_name> apt-get update && apt-get install -y python3 python3-pip'
-                }
-            }
-            
-        }
-
-        stage('Install Poetry') {
-            steps {
-                // 安裝 Poetry（如果尚未安裝）
-                sh 'curl -sSL https://install.python-poetry.org | python3 -'
             }
         }
 
@@ -50,7 +33,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            // 如果有其他清理步驟，可以在這裡添加
+            // 如果有需要的清理步驟，可以在這裡添加
         }
         success {
             echo 'All tests passed!'
