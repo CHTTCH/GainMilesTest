@@ -1,9 +1,9 @@
 pipeline {
     agent { label 'build-agent' }  // 指定要使用的 Jenkins 節點標籤
 
-    environment {
-        PATH = "/root/.local/bin:${PATH}"  // 將 /root/.local/bin 添加到 PATH
-    }
+    // environment {
+    //     PATH = "/root/.local/bin:${PATH}"  // 將 /root/.local/bin 添加到 PATH
+    // }
 
     stages {
         stage('Checkout') {
