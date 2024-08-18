@@ -17,7 +17,7 @@ pipeline {
 
         stage('Refresh .bashrc') {
             steps {
-                // 使用 Poetry 安裝依賴
+                sh 'cat ~/.bashrc'
                 sh '. ~/.bashrc'
             }
         }
