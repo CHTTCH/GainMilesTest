@@ -1,9 +1,9 @@
 pipeline {
     agent { label 'build-agent' }  // 指定要使用的 Jenkins 節點標籤
 
-    environment {
-        PATH = "/root/.local/bin:${PATH}"  // 將 /root/.local/bin 添加到 PATH
-    }
+    // environment {
+    //     PATH = "/root/.local/bin:${PATH}"  // 將 /root/.local/bin 添加到 PATH
+    // }
 
     stages {
         stage('Checkout') {
@@ -24,18 +24,23 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // 使用 Poetry 安裝依賴
-                sh 'whoami'
-                sh 'poetry'
-                sh 'poetry install'
+                sh '''
+                . ~/.bashrc
+                poetry install
+                poetry run python -m unittest discover
+                '''
+                // sh 'whoami'
+                // sh 'poetry'
+                // sh 'poetry install'
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                // 使用 Poetry 運行 Python 的 unittest 測試
-                sh 'poetry run python -m unittest discover'
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         // 使用 Poetry 運行 Python 的 unittest 測試
+        //         sh 'poetry run python -m unittest discover'
+        //     }
+        // }
     }
 
     post {
