@@ -5,6 +5,11 @@ pipeline {
         POETRY_HOME = "${HOME}/.poetry"  // Poetry 的安裝路徑
         PATH = "${POETRY_HOME}/bin:${PATH}"  // 將 Poetry 加入 PATH
     }
+    
+    options {
+        // 確保以 root 用戶運行
+        runAsUser 'root'
+    }
 
     stages {
         stage('Checkout') {
