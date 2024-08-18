@@ -14,13 +14,6 @@ pipeline {
             }
         }
 
-        // stage('Refresh .bashrc') {
-        //     steps {
-        //         sh 'cat ~/.bashrc'
-        //         sh '. ~/.bashrc'
-        //     }
-        // }
-
         stage('Install Dependencies') {
             steps {
                 // 使用 Poetry 安裝依賴
